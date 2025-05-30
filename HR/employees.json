@@ -1,0 +1,33 @@
+{
+  "company": "Contoso Tech",
+  "lastUpdated": "2025-05-27T13:00:00Z",
+  "departments": [
+    {
+      "name": "Engineering",
+      "employees": [
+        { "id": 1, "name": "Alice Johnson", "role": "DevOps Engineer", "salary": 115000, "remote": true },
+        { "id": 2, "name": "Bob Lee", "role": "Data Analyst", "salary": 92000, "remote": false },
+        { "id": 3, "name": "Carol Martinez", "role": "AI Researcher", "salary": 145000, "remote": true },
+        { "id": 4, "name": "Dan Chen", "role": "Software Engineer", "salary": 101000, "remote": false }
+      ]
+    },
+    {
+      "name": "Marketing",
+      "employees": [
+        { "id": 5, "name": "Eve Summers", "role": "Content Strategist", "salary": 85000, "remote": true },
+        { "id": 6, "name": "Frank Moore", "role": "SEO Specialist", "salary": 78000, "remote": true },
+        { "id": 7, "name": "Grace Liu", "role": "Brand Manager", "salary": 97000, "remote": false }
+      ]
+    },
+    {
+      "name": "Sales",
+      "employees": [
+        { "id": 8, "name": "Henry Carter", "role": "Account Exec", "salary": 88000, "remote": false },
+        { "id": 9, "name": "Isla Green", "role": "Sales Engineer", "salary": 104000, "remote": true },
+        { "id": 10, "name": "Jackie Kim", "role": "BDR", "salary": 71000, "remote": false },
+        { "id": 11, "name": "Kevin Singh", "role": "Territory Manager", "salary": 99000, "remote": true },
+        { "id": 12, "name": "Lena Park", "role": "Regional Director", "salary": 123000, "remote": false }
+      ]
+    }
+  ]
+}

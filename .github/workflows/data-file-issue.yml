@@ -1,0 +1,55 @@
+name: Data File Issue Creator
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.csv'
+      - '**.json'
+      - '**.xlsx'
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  create-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          
+      - name: Get changed data files
+        id: diff
+        run: |
+          git fetch origin main --depth=2
+          # Handle case when repo might be new or have limited history
+          if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
+            # Repository has history - use HEAD~1 for comparison
+            echo "CHANGED_FILES=$(git diff --name-status HEAD~1 HEAD | grep -E '\.(csv|json|xlsx)$' | grep -E '^[AM]' | awk '{print $2}' | xargs)" >> $GITHUB_ENV
+          else
+            # New repository - list all data files as changed
+            echo "CHANGED_FILES=$(find . -type f -name "*.csv" -o -name "*.json" -o -name "*.xlsx" | grep -v "^./.git/" | sed 's|^./||' | xargs)" >> $GITHUB_ENV
+          fi
+          
+      - name: Create issues for changed data files
+        if: env.CHANGED_FILES != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for file in $CHANGED_FILES; do
+            DATE=$(date +%F)
+            FILENAME=$(basename "$file")
+            
+            # Read template and substitute variables
+            BODY=$(cat .github/issue-template.md | sed "s|{{FILE_PATH}}|$file|g")
+            
+            # Create the issue
+            gh issue create \
+              --title "$DATE - $FILENAME" \
+              --body "$BODY" \
+              --repo "$GITHUB_REPOSITORY"
+          done

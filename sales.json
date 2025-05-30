@@ -1,0 +1,56 @@
+[
+  {
+    "Region": "West",
+    "State": "Texas",
+    "Units": 927.0,
+    "Price": 923.71
+  },
+  {
+    "Region": "North",
+    "State": "Tennessee",
+    "Units": 466.0,
+    "Price": 770.67
+  },
+  {
+    "Region": "East",
+    "State": "Florida",
+    "Units": 520.0,
+    "Price": 458.68
+  },
+  {
+    "Region": "East",
+    "State": "Maine",
+    "Units": 828.0,
+    "Price": 661.24
+  },
+  {
+    "Region": "West",
+    "State": "Virginia",
+    "Units": 465.0,
+    "Price": 53.58
+  },
+  {
+    "Region": "North",
+    "State": "Missouri",
+    "Units": 436.0,
+    "Price": 235.67
+  },
+  {
+    "Region": "South",
+    "State": "Kansas",
+    "Units": 214.0,
+    "Price": 992.47
+  },
+  {
+    "Region": "North",
+    "State": "North Dakota",
+    "Units": 789.0,
+    "Price": 640.72
+  },
+  {
+    "Region": "South",
+    "State": "Delaware",
+    "Units": 712.0,
+    "Price": 508.55
+  }
+]
