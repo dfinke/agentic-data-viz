@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Data Analysis - 2025-05-30</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .intro, .conclusion {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e8f4f8;
+        }
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .chart-wrapper {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .chart-wrapper h3 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+        }
+        .stat-card .value {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sales Data Analysis</h1>
+        <p style="text-align: center; color: #7f8c8d; font-style: italic;">Generated on May 30, 2025 at 10:28 AM</p>
+        
+        <!-- Introduction -->
+        <section class="intro">
+            <h2>Introduction</h2>
+            <p>This analysis examines sales performance data across multiple regions and states. The dataset contains information about 9 sales records, covering 4 regions (West, North, East, South) and 9 states.</p>
+            <p>The data includes key metrics such as units sold, pricing information, and geographical distribution, providing insights into sales performance patterns and regional variations.</p>
+        </section>
+
+        <!-- Key Statistics -->
+        <h2>Key Performance Metrics</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h4>Total Units Sold</h4>
+                <div class="value">5,357</div>
+            </div>
+            <div class="stat-card">
+                <h4>Total Revenue</h4>
+                <div class="value">$3,209,102.79</div>
+            </div>
+            <div class="stat-card">
+                <h4>Average Price</h4>
+                <div class="value">$582.81</div>
+            </div>
+            <div class="stat-card">
+                <h4>Average Units</h4>
+                <div class="value">595</div>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <h2>Sales Data Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>State</th>
+                    <th>Units Sold</th>
+                    <th>Price ($)</th>
+                    <th>Revenue ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>West</td>
+                    <td>Texas</td>
+                    <td>927</td>
+                    <td>$923.71</td>
+                    <td>$856,279.17</td>
+                </tr>
+                <tr>
+                    <td>North</td>
+                    <td>Tennessee</td>
+                    <td>466</td>
+                    <td>$770.67</td>
+                    <td>$359,132.22</td>
+                </tr>
+                <tr>
+                    <td>East</td>
+                    <td>Florida</td>
+                    <td>520</td>
+                    <td>$458.68</td>
+                    <td>$238,513.60</td>
+                </tr>
+                <tr>
+                    <td>East</td>
+                    <td>Maine</td>
+                    <td>828</td>
+                    <td>$661.24</td>
+                    <td>$547,506.72</td>
+                </tr>
+                <tr>
+                    <td>West</td>
+                    <td>Virginia</td>
+                    <td>465</td>
+                    <td>$53.58</td>
+                    <td>$24,914.70</td>
+                </tr>
+                <tr>
+                    <td>North</td>
+                    <td>Missouri</td>
+                    <td>436</td>
+                    <td>$235.67</td>
+                    <td>$102,752.12</td>
+                </tr>
+                <tr>
+                    <td>South</td>
+                    <td>Kansas</td>
+                    <td>214</td>
+                    <td>$992.47</td>
+                    <td>$212,388.58</td>
+                </tr>
+                <tr>
+                    <td>North</td>
+                    <td>North Dakota</td>
+                    <td>789</td>
+                    <td>$640.72</td>
+                    <td>$505,528.08</td>
+                </tr>
+                <tr>
+                    <td>South</td>
+                    <td>Delaware</td>
+                    <td>712</td>
+                    <td>$508.55</td>
+                    <td>$362,087.60</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Charts -->
+        <h2>Data Visualization</h2>
+        <div class="charts-container">
+            <div class="chart-wrapper">
+                <h3>Total Units by Region</h3>
+                <canvas id="unitsChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <h3>Revenue by Region</h3>
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <h3>Price vs Units Scatter Plot</h3>
+                <canvas id="scatterChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <h3>Average Price by Region</h3>
+                <canvas id="avgPriceChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <section class="conclusion">
+            <h2>Conclusion</h2>
+            <p>The sales data analysis reveals several key insights:</p>
+            <ul>
+                <li><strong>Top Performance:</strong> Texas generated the highest revenue, while Texas sold the most units.</li>
+                <li><strong>Pricing Leader:</strong> Kansas achieved the highest average price point at $992.47.</li>
+                <li><strong>Regional Distribution:</strong> Sales activity spans 4 regions with varying performance levels.</li>
+                <li><strong>Revenue Opportunity:</strong> Total revenue of $3,209,102.79 from 5,357 units indicates healthy market activity.</li>
+            </ul>
+            <p>This data provides a foundation for strategic decision-making regarding regional expansion, pricing optimization, and resource allocation across different markets.</p>
+        </section>
+    </div>
+
+    <script>
+        // Chart.js configuration and data
+        const chartColors = {
+            primary: '#3498db',
+            secondary: '#e74c3c',
+            success: '#2ecc71',
+            warning: '#f39c12',
+            info: '#9b59b6'
+        };
+
+        // Units by Region Chart
+        const unitsCtx = document.getElementById('unitsChart').getContext('2d');
+        new Chart(unitsCtx, {
+            type: 'bar',
+            data: {
+                labels: ['East', 'North', 'South', 'West'],
+                datasets: [{
+                    label: 'Total Units',
+                    data: [1348, 1691, 926, 1392],
+                    backgroundColor: chartColors.primary,
+                    borderColor: chartColors.primary,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Revenue by Region Chart
+        const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+        new Chart(revenueCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['East', 'North', 'South', 'West'],
+                datasets: [{
+                    data: [786020.32, 967412.42, 574476.18, 881193.87],
+                    backgroundColor: [
+                        chartColors.primary,
+                        chartColors.secondary,
+                        chartColors.success,
+                        chartColors.warning
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Price vs Units Scatter Plot
+        const scatterCtx = document.getElementById('scatterChart').getContext('2d');
+        const scatterData = [{"x": 923.71, "y": 927, "label": "Texas"}, {"x": 770.67, "y": 466, "label": "Tennessee"}, {"x": 458.68, "y": 520, "label": "Florida"}, {"x": 661.24, "y": 828, "label": "Maine"}, {"x": 53.58, "y": 465, "label": "Virginia"}, {"x": 235.67, "y": 436, "label": "Missouri"}, {"x": 992.47, "y": 214, "label": "Kansas"}, {"x": 640.72, "y": 789, "label": "North Dakota"}, {"x": 508.55, "y": 712, "label": "Delaware"}];
+        new Chart(scatterCtx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Price vs Units',
+                    data: scatterData,
+                    backgroundColor: chartColors.secondary,
+                    borderColor: chartColors.secondary,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Price ($)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Units Sold'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const point = scatterData[context.dataIndex];
+                                return point.label + ': $' + point.x.toFixed(2) + ', ' + point.y + ' units';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Average Price by Region Chart
+        const avgPriceCtx = document.getElementById('avgPriceChart').getContext('2d');
+        new Chart(avgPriceCtx, {
+            type: 'line',
+            data: {
+                labels: ['East', 'North', 'South', 'West'],
+                datasets: [{
+                    label: 'Average Price ($)',
+                    data: [559.96, 549.02, 750.51, 488.65],
+                    borderColor: chartColors.success,
+                    backgroundColor: chartColors.success + '20',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Price ($)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
