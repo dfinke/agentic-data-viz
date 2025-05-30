@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Data Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .metric-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .chart-container h3 {
+            margin-bottom: 1rem;
+            color: #4a5568;
+            text-align: center;
+        }
+        
+        .insights {
+            background: #e8f5e8;
+            border-left: 4px solid #4caf50;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .insights h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+        
+        .insights ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .insights li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .insights li:before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sales Data Analysis</h1>
+            <p>Comprehensive analysis of regional sales performance</p>
+        </div>
+
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>This analysis examines sales data across multiple regions and states, providing insights into sales performance, 
+            revenue distribution, and regional trends. The dataset contains 9 sales records spanning 4 regions (West, North, East, South) 
+            with information on units sold and pricing for each state.</p>
+            <p>Our analysis focuses on understanding regional performance, identifying top-performing markets, and discovering 
+            patterns in pricing and volume relationships that can inform business strategy and decision-making.</p>
+        </div>
+
+        <div class="section">
+            <h2>Key Metrics</h2>
+            <div class="metrics-grid" id="metricsGrid">
+                <!-- Metrics will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Sales Data Table</h2>
+            <div class="table-container">
+                <table id="salesTable">
+                    <thead>
+                        <tr>
+                            <th>Region</th>
+                            <th>State</th>
+                            <th>Units Sold</th>
+                            <th>Price ($)</th>
+                            <th>Total Revenue ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Data Visualizations</h2>
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3>Sales by Region</h3>
+                    <canvas id="regionChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Revenue Distribution</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Units vs Price Relationship</h3>
+                    <canvas id="scatterChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Top States by Revenue</h3>
+                    <canvas id="topStatesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Conclusion</h2>
+            <div class="insights">
+                <h3>Key Insights</h3>
+                <ul id="insightsList">
+                    <!-- Insights will be populated by JavaScript -->
+                </ul>
+            </div>
+            <p>The analysis reveals significant variations in sales performance across regions and states. Understanding these patterns 
+            can help optimize pricing strategies, focus marketing efforts on high-performing regions, and identify opportunities for 
+            growth in underperforming markets.</p>
+            <p>Future analysis could benefit from additional data points such as time series information, customer demographics, 
+            and market conditions to provide even deeper insights into sales performance drivers.</p>
+        </div>
+    </div>
+
+    <script>
+        // Sales data embedded in JavaScript
+        const salesData = [
+            {"Region": "West", "State": "Texas", "Units": 927, "Price": 923.71},
+            {"Region": "North", "State": "Tennessee", "Units": 466, "Price": 770.67},
+            {"Region": "East", "State": "Florida", "Units": 520, "Price": 458.68},
+            {"Region": "East", "State": "Maine", "Units": 828, "Price": 661.24},
+            {"Region": "West", "State": "Virginia", "Units": 465, "Price": 53.58},
+            {"Region": "North", "State": "Missouri", "Units": 436, "Price": 235.67},
+            {"Region": "South", "State": "Kansas", "Units": 214, "Price": 992.47},
+            {"Region": "North", "State": "North Dakota", "Units": 789, "Price": 640.72},
+            {"Region": "South", "State": "Delaware", "Units": 712, "Price": 508.55}
+        ];
+
+        // Calculate derived metrics
+        salesData.forEach(item => {
+            item.Revenue = item.Units * item.Price;
+        });
+
+        // Calculate summary statistics
+        const totalRevenue = salesData.reduce((sum, item) => sum + item.Revenue, 0);
+        const totalUnits = salesData.reduce((sum, item) => sum + item.Units, 0);
+        const avgPrice = salesData.reduce((sum, item) => sum + item.Price, 0) / salesData.length;
+        const maxRevenue = Math.max(...salesData.map(item => item.Revenue));
+        const topState = salesData.find(item => item.Revenue === maxRevenue);
+
+        // Populate metrics
+        function populateMetrics() {
+            const metricsGrid = document.getElementById('metricsGrid');
+            const metrics = [
+                { value: `$${totalRevenue.toLocaleString('en-US', {maximumFractionDigits: 0})}`, label: 'Total Revenue' },
+                { value: totalUnits.toLocaleString(), label: 'Total Units Sold' },
+                { value: `$${avgPrice.toFixed(2)}`, label: 'Average Price' },
+                { value: topState.State, label: 'Top Performing State' }
+            ];
+
+            metricsGrid.innerHTML = metrics.map(metric => 
+                `<div class="metric-card">
+                    <h3>${metric.value}</h3>
+                    <p>${metric.label}</p>
+                </div>`
+            ).join('');
+        }
+
+        // Populate data table
+        function populateTable() {
+            const tbody = document.querySelector('#salesTable tbody');
+            tbody.innerHTML = salesData.map(item => 
+                `<tr>
+                    <td>${item.Region}</td>
+                    <td>${item.State}</td>
+                    <td>${item.Units.toLocaleString()}</td>
+                    <td>$${item.Price.toFixed(2)}</td>
+                    <td>$${item.Revenue.toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
+                </tr>`
+            ).join('');
+        }
+
+        // Create charts
+        function createCharts() {
+            // Region sales chart
+            const regionData = {};
+            salesData.forEach(item => {
+                if (!regionData[item.Region]) {
+                    regionData[item.Region] = { units: 0, revenue: 0 };
+                }
+                regionData[item.Region].units += item.Units;
+                regionData[item.Region].revenue += item.Revenue;
+            });
+
+            new Chart(document.getElementById('regionChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(regionData),
+                    datasets: [{
+                        data: Object.values(regionData).map(d => d.revenue),
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            // Revenue distribution chart
+            new Chart(document.getElementById('revenueChart'), {
+                type: 'bar',
+                data: {
+                    labels: salesData.map(item => item.State),
+                    datasets: [{
+                        label: 'Revenue ($)',
+                        data: salesData.map(item => item.Revenue),
+                        backgroundColor: '#667eea'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Scatter plot for units vs price
+            new Chart(document.getElementById('scatterChart'), {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Units vs Price',
+                        data: salesData.map(item => ({x: item.Price, y: item.Units, label: item.State})),
+                        backgroundColor: '#f5576c'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Price ($)' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Units Sold' }
+                        }
+                    }
+                }
+            });
+
+            // Top states by revenue
+            const sortedStates = [...salesData].sort((a, b) => b.Revenue - a.Revenue).slice(0, 5);
+            new Chart(document.getElementById('topStatesChart'), {
+                type: 'bar',
+                data: {
+                    labels: sortedStates.map(item => item.State),
+                    datasets: [{
+                        label: 'Revenue ($)',
+                        data: sortedStates.map(item => item.Revenue),
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Generate insights
+        function generateInsights() {
+            const insights = [
+                `Texas leads in revenue generation with $${topState.Revenue.toLocaleString()}`,
+                `The West region shows high variability in pricing, from $53.58 to $923.71`,
+                `Kansas has the highest individual unit price at $992.47`,
+                `Total business volume represents ${totalUnits.toLocaleString()} units across 9 states`,
+                `Average revenue per state is $${(totalRevenue / salesData.length).toLocaleString()}`
+            ];
+
+            document.getElementById('insightsList').innerHTML = insights.map(insight => 
+                `<li>${insight}</li>`
+            ).join('');
+        }
+
+        // Initialize the dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            populateMetrics();
+            populateTable();
+            createCharts();
+            generateInsights();
+        });
+    </script>
+</body>
+</html>
